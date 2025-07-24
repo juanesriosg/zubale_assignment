@@ -68,7 +68,7 @@ A conversational AI system that processes product questions using a Retrieval-Au
    ```bash
    curl -X POST "http://localhost:8001/chat" \
         -H "Content-Type: application/json" \
-        -d '{"user_id": "alice", "query": "I need a smartphone for photography"}'
+        -d '{"user_id": "user_123", "query": "I need a smartphone for photography"}'
    ```
 
 ### Docker Setup
