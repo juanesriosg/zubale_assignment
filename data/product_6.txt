@@ -1,0 +1,14 @@
+Product: Dell XPS 13 Plus
+Category: Ultrabook Laptop
+Price: $1,249
+Memory: 16GB, 32GB LPDDR5 RAM options
+Storage: 512GB, 1TB, 2TB PCIe SSD options
+Display: 13.4-inch InfinityEdge display, 4K+ touchscreen available
+Processor: 12th Gen Intel Core i5 or i7 with Intel Iris Xe graphics
+Design: Machined aluminum and carbon fiber construction
+Features: Haptic touchpad, capacitive function keys, invisible trackpad
+Ports: Two Thunderbolt 4 ports with power delivery and DisplayPort
+Battery: Up to 12 hours battery life with ExpressCharge fast charging
+Security: Windows Hello facial recognition, TPM 2.0 security chip
+Colors: Platinum Silver, Graphite
+Operating System: Windows 11 Pro with enhanced productivity features

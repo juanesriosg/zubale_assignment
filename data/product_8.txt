@@ -1,0 +1,13 @@
+Product: Google Pixel 8 Pro
+Category: Smartphone
+Price: $999
+Storage: 128GB, 256GB, 512GB, 1TB options
+Display: 6.7-inch LTPO OLED display with 120Hz refresh rate and always-on display
+Camera: 50MP main, 48MP ultra-wide, 48MP telephoto with AI-enhanced photography
+Processor: Google Tensor G3 chip with Titan M security coprocessor
+AI Features: Magic Eraser, Real Tone, Live Translate, Call Screen
+Battery: All-day battery with 30W fast charging and wireless charging
+Features: Face Unlock, fingerprint sensor, water resistance (IP68)
+Updates: 7 years of OS and security updates guaranteed
+Colors: Obsidian, Porcelain, Bay
+Operating System: Android 14 with pure Google experience and Pixel exclusive features

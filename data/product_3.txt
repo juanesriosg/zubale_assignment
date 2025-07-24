@@ -1,0 +1,12 @@
+Product: AirPods Pro (2nd generation)
+Category: Wireless Earbuds
+Price: $249
+Features: Active Noise Cancellation, Transparency mode, Adaptive EQ
+Audio: Spatial Audio with dynamic head tracking, Personalized Spatial Audio
+Chip: H2 chip for advanced audio processing and improved battery life
+Battery: Up to 6 hours listening time, up to 30 hours with charging case
+Controls: Touch controls on stems, "Hey Siri" voice activation
+Case: MagSafe and wireless charging case with built-in speaker for Find My
+Fit: Four sizes of silicone ear tips for comfortable, secure fit
+Water Resistance: IPX4 rated for sweat and water resistance
+Compatibility: Works seamlessly with iPhone, iPad, Mac, Apple Watch, and Apple TV

@@ -1,0 +1,12 @@
+Product: Samsung Galaxy S24 Ultra
+Category: Smartphone
+Price: $1,299
+Storage: 256GB, 512GB, 1TB options with microSD expansion
+Display: 6.8-inch Dynamic AMOLED 2X display with 120Hz adaptive refresh rate
+Camera: 200MP main camera, 50MP periscope telephoto, 12MP ultra-wide, 12MP telephoto
+Processor: Snapdragon 8 Gen 3 for Galaxy with enhanced AI capabilities
+Battery: 5000mAh with 45W fast charging, 15W wireless charging
+Features: S Pen included, Samsung DeX, ultrasonic fingerprint sensor
+Durability: Gorilla Glass Victus 2, aluminum frame, IP68 water resistance
+Colors: Titanium Black, Titanium Gray, Titanium Violet, Titanium Yellow
+Operating System: Android 14 with One UI 6.1 and 7 years of security updates

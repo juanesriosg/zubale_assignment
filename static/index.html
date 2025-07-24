@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Query Bot - Chat Interface</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-container {
+            width: 800px;
+            height: 600px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: #4f46e5;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .chat-header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .chat-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .user-info {
+            background: #f8fafc;
+            padding: 10px 20px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-info input {
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .user-info button {
+            padding: 8px 16px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .user-info button:hover {
+            background: #dc2626;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f9fafb;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 16px;
+        }
+
+        .message.user .message-avatar {
+            background: #10b981;
+        }
+
+        .message.bot .message-avatar {
+            background: #6366f1;
+        }
+
+        .message-content {
+            flex: 1;
+            max-width: 70%;
+        }
+
+        .message-bubble {
+            padding: 15px;
+            border-radius: 18px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .message.user .message-bubble {
+            background: #10b981;
+            color: white;
+            margin-left: auto;
+        }
+
+        .message.bot .message-bubble {
+            background: white;
+            color: #1f2937;
+            border: 1px solid #e5e7eb;
+        }
+
+        .message-meta {
+            font-size: 11px;
+            color: #6b7280;
+            margin-top: 5px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .message.user .message-meta {
+            justify-content: flex-end;
+        }
+
+        .chat-input {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 25px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .chat-input input:focus {
+            border-color: #4f46e5;
+        }
+
+        .chat-input button {
+            padding: 12px 24px;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .chat-input button:hover {
+            background: #4338ca;
+        }
+
+        .chat-input button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .loading {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        .loading-dots {
+            display: inline-block;
+        }
+
+        .loading-dots::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60% { content: '...'; }
+            80%, 100% { content: ''; }
+        }
+
+        .error {
+            background: #fef2f2;
+            color: #dc2626;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-size: 12px;
+        }
+
+        .badge {
+            background: #ddd6fe;
+            color: #7c3aed;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+
+        .badge.followup {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>🤖 Product Query Bot</h1>
+            <p>Ask me about smartphones, laptops, headphones, and more!</p>
+        </div>
+        
+        <div class="user-info">
+            <label>User ID:</label>
+            <input type="text" id="userId" value="user123" placeholder="Enter your user ID">
+            <button onclick="clearHistory()">Clear History</button>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot">
+                <div class="message-avatar">🤖</div>
+                <div class="message-content">
+                    <div class="message-bubble">
+                        Welcome! I'm your product assistant. I can help you find information about smartphones, laptops, headphones, gaming consoles, and other tech products. 
+                        <br><br>
+                        I remember our conversation, so feel free to ask follow-up questions!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-input">
+            <input type="text" id="messageInput" placeholder="Ask about products... (e.g., 'I need a good laptop for gaming')" onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()" id="sendButton">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8001';
+        let isLoading = false;
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter' && !isLoading) {
+                sendMessage();
+            }
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const userId = document.getElementById('userId').value.trim();
+            const message = input.value.trim();
+
+            if (!message || !userId || isLoading) return;
+
+            // Add user message to chat
+            addMessage('user', message);
+            input.value = '';
+            setLoading(true);
+
+            try {
+                const response = await fetch(`${API_BASE}/chat`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        query: message
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                
+                // Add bot response to chat
+                addMessage('bot', data.response, {
+                    isFollowup: data.conversation_context?.is_followup_question,
+                    documentsUsed: data.metadata?.documents_used,
+                    searchQueries: data.search_enhancement?.optimized_queries,
+                    reasoning: data.search_enhancement?.reasoning
+                });
+
+            } catch (error) {
+                console.error('Error:', error);
+                addMessage('bot', `Sorry, I encountered an error: ${error.message}. Please try again.`, { isError: true });
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        function addMessage(sender, content, metadata = {}) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+
+            const avatar = sender === 'user' ? '👤' : '🤖';
+            const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            let metaInfo = `<span>${timestamp}</span>`;
+            
+            if (metadata.isFollowup) {
+                metaInfo += `<span class="badge followup">Follow-up</span>`;
+            }
+            
+            if (metadata.documentsUsed) {
+                metaInfo += `<span class="badge">${metadata.documentsUsed} docs</span>`;
+            }
+
+            messageDiv.innerHTML = `
+                <div class="message-avatar">${avatar}</div>
+                <div class="message-content">
+                    <div class="message-bubble">${content.replace(/\n/g, '<br>')}</div>
+                    <div class="message-meta">${metaInfo}</div>
+                </div>
+            `;
+
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function setLoading(loading) {
+            isLoading = loading;
+            const sendButton = document.getElementById('sendButton');
+            const messageInput = document.getElementById('messageInput');
+
+            if (loading) {
+                sendButton.textContent = 'Thinking...';
+                sendButton.disabled = true;
+                messageInput.disabled = true;
+                
+                // Add loading message
+                const messagesContainer = document.getElementById('chatMessages');
+                const loadingDiv = document.createElement('div');
+                loadingDiv.className = 'message bot';
+                loadingDiv.id = 'loadingMessage';
+                loadingDiv.innerHTML = `
+                    <div class="message-avatar">🤖</div>
+                    <div class="message-content">
+                        <div class="message-bubble loading">
+                            <span class="loading-dots">Thinking</span>
+                        </div>
+                    </div>
+                `;
+                messagesContainer.appendChild(loadingDiv);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            } else {
+                sendButton.textContent = 'Send';
+                sendButton.disabled = false;
+                messageInput.disabled = false;
+                
+                // Remove loading message
+                const loadingMessage = document.getElementById('loadingMessage');
+                if (loadingMessage) {
+                    loadingMessage.remove();
+                }
+            }
+        }
+
+        async function clearHistory() {
+            const userId = document.getElementById('userId').value.trim();
+            if (!userId) return;
+
+            try {
+                const response = await fetch(`${API_BASE}/conversation/${userId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    // Clear chat messages except welcome message
+                    const messagesContainer = document.getElementById('chatMessages');
+                    const messages = messagesContainer.querySelectorAll('.message');
+                    messages.forEach((msg, index) => {
+                        if (index > 0) msg.remove(); // Keep first welcome message
+                    });
+                    
+                    // Add confirmation message
+                    addMessage('bot', 'Conversation history cleared! How can I help you today?');
+                } else {
+                    throw new Error('Failed to clear history');
+                }
+            } catch (error) {
+                console.error('Error clearing history:', error);
+                addMessage('bot', 'Sorry, I couldn\'t clear the conversation history. Please try again.', { isError: true });
+            }
+        }
+
+        // Focus on input when page loads
+        window.onload = function() {
+            document.getElementById('messageInput').focus();
+        };
+    </script>
+</body>
+</html>

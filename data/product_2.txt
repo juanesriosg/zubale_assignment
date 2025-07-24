@@ -1,0 +1,12 @@
+Product: MacBook Air M2
+Category: Laptop
+Price: $1,099
+Memory: 8GB, 16GB, 24GB unified memory options
+Storage: 256GB, 512GB, 1TB, 2TB SSD options
+Display: 13.6-inch Liquid Retina display with 500 nits brightness and P3 wide color gamut
+Processor: Apple M2 chip with 8-core CPU and up to 10-core GPU
+Battery: Up to 18 hours of video playback, MagSafe 3 charging
+Features: 1080p FaceTime HD camera, four-speaker sound system, three-mic array
+Ports: Two Thunderbolt ports, 3.5mm headphone jack, MagSafe 3
+Colors: Midnight, Starlight, Space Gray, Silver
+Operating System: macOS Ventura with built-in productivity and creativity apps

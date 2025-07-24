@@ -1,0 +1,11 @@
+Product: iPhone 15 Pro Max
+Category: Smartphone
+Price: $1,199
+Storage: 256GB, 512GB, 1TB options
+Display: 6.7-inch Super Retina XDR OLED display with ProMotion technology
+Camera: 48MP main camera with 5x telephoto zoom, Ultra Wide camera, and advanced computational photography
+Processor: A17 Pro chip with 6-core CPU and 6-core GPU
+Battery: All-day battery life with up to 29 hours video playback
+Features: Face ID, wireless charging, MagSafe compatible, water resistant (IP68)
+Colors: Natural Titanium, Blue Titanium, White Titanium, Black Titanium
+Operating System: iOS 17 with latest security updates and privacy features

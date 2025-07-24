@@ -1,0 +1,11 @@
+venv/
+.env
+
+# Pytest
+pytest_cache/
+
+# pycache
+__pycache__/
+
+#claude
+.claude/
